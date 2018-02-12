@@ -3,11 +3,13 @@ package world.avatarhorizon.spigot.chatter;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import world.avatarhorizon.spigot.chatter.api.IChatSender;
 import world.avatarhorizon.spigot.chatter.api.IChatterRegister;
 import world.avatarhorizon.spigot.chatter.commands.ChannelCommandExecutor;
 import world.avatarhorizon.spigot.chatter.commands.ChatterCommandExecutor;
 import world.avatarhorizon.spigot.chatter.controllers.ChatListener;
 import world.avatarhorizon.spigot.chatter.controllers.ChatManager;
+import world.avatarhorizon.spigot.chatter.controllers.ChatSender;
 import world.avatarhorizon.spigot.chatter.controllers.ChatterRegister;
 import world.avatarhorizon.spigot.chatter.formatters.PlayerFormatter;
 import world.avatarhorizon.spigot.chatter.formatters.TitleFormatter;
@@ -21,6 +23,7 @@ public class ChatterPlugin extends JavaPlugin
 {
     private ChatManager manager;
     private IChatterRegister register;
+    private IChatSender sender;
 
     @Override
     public void onLoad()
@@ -37,8 +40,10 @@ public class ChatterPlugin extends JavaPlugin
         manager.setLocalChannel(new ChatterChannel(new LocalChannel(manager)));
 
         register = new ChatterRegister(manager);
+        sender = new ChatSender(manager);
 
         getServer().getServicesManager().register(IChatterRegister.class, register, this, ServicePriority.Normal);
+        getServer().getServicesManager().register(IChatSender.class, sender, this, ServicePriority.Normal);
     }
 
     @Override
@@ -58,7 +63,9 @@ public class ChatterPlugin extends JavaPlugin
     public void onDisable()
     {
         getServer().getServicesManager().unregister(IChatterRegister.class, register);
+        getServer().getServicesManager().unregister(IChatSender.class, sender);
         register = null;
         manager = null;
+        sender = null;
     }
 }

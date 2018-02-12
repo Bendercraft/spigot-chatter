@@ -83,7 +83,7 @@ public class ChatListener implements Listener
                 {
                     formattedMessage = formatter.formatMessage(event.getPlayer(), formattedMessage);
                 }
-                formattedMessage = formattedMessage.replace("%1$s", event.getPlayer().getDisplayName());
+
                 for (Player spy : spies)
                 {
                     spy.sendMessage(formattedMessage);
