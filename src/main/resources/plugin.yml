@@ -1,0 +1,43 @@
+name: Chatter
+main: world.avatarhorizon.spigot.chatter.ChatterPlugin
+authors: [Nokorbis]
+version: 1.0.0
+commands:
+    chatter:
+        description: Chatter main command
+        aliases: [chat]
+        usage: /chatter help
+    channel:
+        description: Command to change current channel
+        aliases: [chan]
+        usage: /channel help
+permissions:
+    chatter.command.toggleglobal:
+        description: Allow to toggle the global channel
+        default: true
+    chatter.command.reload:
+        description: Allow to use the reload command for chatter
+        default: op
+    chatter.command.title:
+        description: Allow to use the title command to set the title of a player
+        default: op
+    chatter.command.socialspy:
+        description: Allow the usage of the social spy command
+        default: op
+    chatter.admin.socialspy.*:
+        description: Allow to social spy every channel.
+        default: op
+        children:
+        - chatter.admin.socialspy.local
+    chatter.admin.socialspy.local:
+        description: Allow to social spy the local channel.
+        default: false
+    chatter.channel.help:
+        description: Allow to use the channel help subcommand
+        default: true
+    chatter.chatter.help:
+        description: Allow to use the chatter help subcommand
+        default: true
+    chatter.channel.set:
+        description: Allow to set a default channel when speaking.
+        default: true
