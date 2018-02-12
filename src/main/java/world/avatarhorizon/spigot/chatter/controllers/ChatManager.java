@@ -162,7 +162,6 @@ public class ChatManager
         }
         else
         {
-            //chatPlayer.setPlayer(player); //OnLogin, player are not in the Bukkit online player list, so the deserializer cannot find it.
             if (chatPlayer.getCurrentChannel() == null)
             {
                 chatPlayer.setCurrentChannel(localChannel);
@@ -176,15 +175,9 @@ public class ChatManager
         }
     }
 
-    @Deprecated
-    /*
-    Since the PlayerQuitEvent is not fired when the server is shut down, this method is no longer used
-    Kept just in case
-     */
     public void logoutPLayer(Player player)
     {
-        ChatterPlayer chatPlayer = chatterPlayers.remove(player.getUniqueId());
-        chatterPlayerSaver.save(chatPlayer);
+        chatterPlayers.remove(player.getUniqueId());
     }
 
     public ChatterPlayer getChatterPlayer(Player player)

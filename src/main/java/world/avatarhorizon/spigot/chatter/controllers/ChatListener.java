@@ -5,6 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import world.avatarhorizon.spigot.chatter.ChatterSettings;
 import world.avatarhorizon.spigot.chatter.api.IChatFormatter;
 import world.avatarhorizon.spigot.chatter.models.ChatterChannel;
@@ -31,13 +32,12 @@ public class ChatListener implements Listener
         chatManager.loginPlayer(event.getPlayer());
     }
 
-    /*Save should be handled for each command since PlayerQuitEvent is not called when the server is shut down
     @EventHandler(ignoreCancelled = true)
     public void onPlayerLogout(PlayerQuitEvent event)
     {
         chatManager.logoutPLayer(event.getPlayer());
     }
-    */
+
 
     @EventHandler(ignoreCancelled = true)
     public void onPlayerChat(AsyncPlayerChatEvent event)
