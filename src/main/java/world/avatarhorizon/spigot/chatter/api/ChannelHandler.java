@@ -40,8 +40,17 @@ public abstract class ChannelHandler
     public abstract void filterRecipients(Player sender, Set<Player> recipients, Set<Player> spies);
 
     /**
-     *  Check if the player is allowed to access that channel. To send message to chat channel or to set this channel as default one.
+     *  Check if the player is allowed to access that channel.
+     *  This method is called when a Player want to set the channel as default channel or when he tries to send a message into it.
      */
     public abstract boolean isAccessAllowed(Player player);
+
+    /**
+     * Check if the player can send a message into that channel. <br>
+     * For instance, if you want to mute a player.
+     * @param player The player whose required to be checked.
+     * @return <code>true</code> if the player can send a message. <br><code>false</code> if the player is not allowed to send a message to this channel.
+     */
+    public abstract boolean canSendMessage(Player player);
 
 }

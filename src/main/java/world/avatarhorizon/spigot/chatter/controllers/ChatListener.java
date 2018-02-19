@@ -43,7 +43,7 @@ public class ChatListener implements Listener
     public void onPlayerChat(AsyncPlayerChatEvent event)
     {
         String message = event.getMessage();
-        ChatterChannel channel = null;
+        ChatterChannel channel;
         if (message.charAt(0) == ChatterSettings.getGlobalPrefix())
         {
             channel = chatManager.getGlobalChannel();
@@ -59,6 +59,11 @@ public class ChatListener implements Listener
         if (!channel.getHandler().isAccessAllowed(event.getPlayer()))
         {
             event.getPlayer().sendMessage(messages.getString("error.channel.no_access"));
+            event.setCancelled(true);
+        }
+        else if (!channel.getHandler().canSendMessage(event.getPlayer()))
+        {
+            event.getPlayer().sendMessage(messages.getString("error.channel.cannot_send"));
             event.setCancelled(true);
         }
         else

@@ -11,13 +11,17 @@ public class ChatterPlayer
     private Player player;
     private String title;
     private ChatterChannel currentChannel;
-    private boolean globalActive;
     private List<String> spiedChannels;
+    private boolean globalActive;
+    private boolean globalMuted;
+    private boolean localMuted;
 
     public ChatterPlayer(Player player)
     {
         this.player = player;
         this.spiedChannels = new LinkedList<>();
+        this.globalMuted = false;
+        this.localMuted = false;
     }
 
     public final Player getPlayer()
@@ -89,5 +93,46 @@ public class ChatterPlayer
     public void setTitle(String title)
     {
         this.title = title;
+    }
+
+    public boolean isGlobalMuted()
+    {
+        return this.globalMuted;
+    }
+
+    public boolean isLocalMuted()
+    {
+        return localMuted;
+    }
+
+    public void setGlobalMuted(boolean globalMuted)
+    {
+        this.globalMuted = globalMuted;
+    }
+
+
+    public void setLocalMuted(boolean localMuted)
+    {
+        this.localMuted = localMuted;
+    }
+
+    /**
+     * Toggle the global muted state.
+     * @return the new value of the globalMuted;
+     */
+    public boolean toggleGlobalMuted()
+    {
+        this.globalMuted = !this.globalMuted;
+        return this.globalMuted;
+    }
+
+    /**
+     * Toggle the local muted state.
+     * @return the new value of the localMuted;
+     */
+    public boolean toggleLocalMuted()
+    {
+        this.localMuted = !this.localMuted;
+        return this.localMuted;
     }
 }

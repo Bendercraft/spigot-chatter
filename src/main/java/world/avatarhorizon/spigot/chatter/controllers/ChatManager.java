@@ -182,6 +182,10 @@ public class ChatManager
 
     public ChatterPlayer getChatterPlayer(Player player)
     {
+        if (player == null)
+        {
+            return null;
+        }
         return chatterPlayers.get(player.getUniqueId());
     }
 

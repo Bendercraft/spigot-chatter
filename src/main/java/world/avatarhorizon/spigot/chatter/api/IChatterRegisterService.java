@@ -1,6 +1,6 @@
 package world.avatarhorizon.spigot.chatter.api;
 
-public interface IChatterRegister
+public interface IChatterRegisterService
 {
     void registerFormatter(IChatFormatter formatter);
 

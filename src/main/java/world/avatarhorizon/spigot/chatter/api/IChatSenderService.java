@@ -3,7 +3,7 @@ package world.avatarhorizon.spigot.chatter.api;
 import org.bukkit.entity.Player;
 import world.avatarhorizon.spigot.chatter.models.ChatterChatException;
 
-public interface IChatSender
+public interface IChatSenderService
 {
     /**
      * Send a message to a channel

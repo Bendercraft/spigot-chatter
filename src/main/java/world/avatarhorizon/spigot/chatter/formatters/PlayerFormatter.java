@@ -21,6 +21,6 @@ public class PlayerFormatter implements IChatFormatter
     {
         return format
                 .replace("{NAME}", sender.getName())
-                .replace("{PLAYER}", sender.getDisplayName()); //%1$s means sender.getDisplayName() since it will be handled by bukkit itself
+                .replace("{PLAYER}", sender.getDisplayName());
     }
 }

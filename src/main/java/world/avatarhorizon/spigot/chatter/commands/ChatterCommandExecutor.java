@@ -3,10 +3,7 @@ package world.avatarhorizon.spigot.chatter.commands;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import world.avatarhorizon.spigot.chatter.commands.subcommands.CmdChatterHelp;
-import world.avatarhorizon.spigot.chatter.commands.subcommands.CmdChatterReload;
-import world.avatarhorizon.spigot.chatter.commands.subcommands.CmdChatterTitle;
-import world.avatarhorizon.spigot.chatter.commands.subcommands.CmdChatterToggleGlobal;
+import world.avatarhorizon.spigot.chatter.commands.subcommands.*;
 import world.avatarhorizon.spigot.chatter.controllers.ChatManager;
 import world.avatarhorizon.spigot.chatter.models.ChatterCommandException;
 
@@ -27,6 +24,7 @@ public class ChatterCommandExecutor implements CommandExecutor
         this.subCommands.add(new CmdChatterToggleGlobal(manager, logger, messages));
         this.subCommands.add(new CmdChatterTitle(manager, logger, messages));
         this.subCommands.add(new CmdChatterReload(manager, logger, messages));
+        this.subCommands.add(new CmdChatterMute(manager, logger, messages));
         this.subCommands.add(new CmdChatterHelp(logger, messages, this.subCommands));
     }
 

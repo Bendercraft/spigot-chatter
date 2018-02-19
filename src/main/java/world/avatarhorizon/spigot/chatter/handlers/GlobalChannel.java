@@ -50,4 +50,15 @@ public class GlobalChannel extends ChannelHandler
     {
         return true;
     }
+
+    @Override
+    public boolean canSendMessage(Player player)
+    {
+        ChatterPlayer chatterPlayer = chatManager.getChatterPlayer(player);
+        if (chatterPlayer == null)
+        {
+            return false;
+        }
+        return !chatterPlayer.isGlobalMuted();
+    }
 }

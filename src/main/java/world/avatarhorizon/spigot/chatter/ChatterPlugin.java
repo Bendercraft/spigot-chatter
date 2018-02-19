@@ -3,14 +3,14 @@ package world.avatarhorizon.spigot.chatter;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import world.avatarhorizon.spigot.chatter.api.IChatSender;
-import world.avatarhorizon.spigot.chatter.api.IChatterRegister;
+import world.avatarhorizon.spigot.chatter.api.IChatSenderService;
+import world.avatarhorizon.spigot.chatter.api.IChatterRegisterService;
 import world.avatarhorizon.spigot.chatter.commands.ChannelCommandExecutor;
 import world.avatarhorizon.spigot.chatter.commands.ChatterCommandExecutor;
 import world.avatarhorizon.spigot.chatter.controllers.ChatListener;
 import world.avatarhorizon.spigot.chatter.controllers.ChatManager;
-import world.avatarhorizon.spigot.chatter.controllers.ChatSender;
-import world.avatarhorizon.spigot.chatter.controllers.ChatterRegister;
+import world.avatarhorizon.spigot.chatter.controllers.ChatSenderService;
+import world.avatarhorizon.spigot.chatter.controllers.ChatterRegisterService;
 import world.avatarhorizon.spigot.chatter.formatters.PlayerFormatter;
 import world.avatarhorizon.spigot.chatter.formatters.TitleFormatter;
 import world.avatarhorizon.spigot.chatter.handlers.GlobalChannel;
@@ -22,8 +22,8 @@ import java.util.logging.Logger;
 public class ChatterPlugin extends JavaPlugin
 {
     private ChatManager manager;
-    private IChatterRegister register;
-    private IChatSender sender;
+    private IChatterRegisterService register;
+    private IChatSenderService sender;
 
     @Override
     public void onLoad()
@@ -39,11 +39,11 @@ public class ChatterPlugin extends JavaPlugin
         manager.setGlobalChannel(new ChatterChannel(new GlobalChannel(manager)));
         manager.setLocalChannel(new ChatterChannel(new LocalChannel(manager)));
 
-        register = new ChatterRegister(manager);
-        sender = new ChatSender(manager);
+        register = new ChatterRegisterService(manager);
+        sender = new ChatSenderService(manager);
 
-        getServer().getServicesManager().register(IChatterRegister.class, register, this, ServicePriority.Normal);
-        getServer().getServicesManager().register(IChatSender.class, sender, this, ServicePriority.Normal);
+        getServer().getServicesManager().register(IChatterRegisterService.class, register, this, ServicePriority.Normal);
+        getServer().getServicesManager().register(IChatSenderService.class, sender, this, ServicePriority.Normal);
     }
 
     @Override
@@ -62,8 +62,8 @@ public class ChatterPlugin extends JavaPlugin
     @Override
     public void onDisable()
     {
-        getServer().getServicesManager().unregister(IChatterRegister.class, register);
-        getServer().getServicesManager().unregister(IChatSender.class, sender);
+        getServer().getServicesManager().unregister(IChatterRegisterService.class, register);
+        getServer().getServicesManager().unregister(IChatSenderService.class, sender);
         register = null;
         manager = null;
         sender = null;

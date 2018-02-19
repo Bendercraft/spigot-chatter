@@ -1,9 +1,10 @@
 package world.avatarhorizon.spigot.chatter.controllers;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import world.avatarhorizon.spigot.chatter.api.IChatFormatter;
-import world.avatarhorizon.spigot.chatter.api.IChatSender;
+import world.avatarhorizon.spigot.chatter.api.IChatSenderService;
 import world.avatarhorizon.spigot.chatter.models.ChatExceptionCause;
 import world.avatarhorizon.spigot.chatter.models.ChatterChannel;
 import world.avatarhorizon.spigot.chatter.models.ChatterChatException;
@@ -11,11 +12,11 @@ import world.avatarhorizon.spigot.chatter.models.ChatterChatException;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ChatSender implements IChatSender
+public class ChatSenderService implements IChatSenderService
 {
     private ChatManager chatManager;
 
-    public ChatSender(ChatManager chatManager)
+    public ChatSenderService(ChatManager chatManager)
     {
         this.chatManager = chatManager;
     }
@@ -37,6 +38,11 @@ public class ChatSender implements IChatSender
         if (!channel.getHandler().isAccessAllowed(sender))
         {
             throw new ChatterChatException(ChatExceptionCause.ACCESS_NOT_ALLOWED);
+        }
+
+         if (!channel.getHandler().canSendMessage(sender))
+        {
+            throw new ChatterChatException(ChatExceptionCause.CANNOT_SEND_MESSAGE);
         }
 
         Set<Player> recipients = new HashSet<>(Bukkit.getOnlinePlayers());

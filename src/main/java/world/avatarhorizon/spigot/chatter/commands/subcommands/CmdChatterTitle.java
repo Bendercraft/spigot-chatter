@@ -46,7 +46,7 @@ public class CmdChatterTitle extends SubCommand
         }
 
         chatManager.updateTitle(player, title);
-        sender.sendMessage(messages.getString("success.title"));
+        sender.sendMessage(messages.getString("success.chatter.title"));
     }
 
     @Override
