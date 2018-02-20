@@ -1,5 +1,6 @@
 package world.avatarhorizon.spigot.chatter.formatters;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import world.avatarhorizon.spigot.chatter.api.IChatFormatter;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 public class PlayerFormatter implements IChatFormatter
 {
-    private static final String[] TAGS = {"{NAME}", "{PLAYER}"};
+    private static final String[] TAGS = {"{NAME}", "{SENDER}"};
 
     @Override
     public List<String> getHandledTags()
@@ -17,10 +18,17 @@ public class PlayerFormatter implements IChatFormatter
     }
 
     @Override
-    public String formatMessage(Player sender, String format)
+    public String formatMessage(CommandSender sender, String format)
     {
-        return format
-                .replace("{NAME}", sender.getName())
-                .replace("{PLAYER}", sender.getDisplayName());
+        format = format.replace("{NAME}", sender.getName());
+        if (sender instanceof Player)
+        {
+            format = format.replace("{SENDER}", ((Player)sender).getDisplayName());
+        }
+        else
+        {
+            format = format.replace("{SENDER}", sender.getName());
+        }
+        return format;
     }
 }

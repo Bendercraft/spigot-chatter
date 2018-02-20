@@ -1,7 +1,7 @@
 package world.avatarhorizon.spigot.chatter.controllers;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import world.avatarhorizon.spigot.chatter.api.IChatFormatter;
 import world.avatarhorizon.spigot.chatter.api.IChatSenderService;
@@ -22,7 +22,7 @@ public class ChatSenderService implements IChatSenderService
     }
 
     @Override
-    public void sendChat(Player sender, String channelName, String message) throws ChatterChatException
+    public void sendChat(CommandSender sender, String channelName, String message) throws ChatterChatException
     {
         if (sender == null)
         {

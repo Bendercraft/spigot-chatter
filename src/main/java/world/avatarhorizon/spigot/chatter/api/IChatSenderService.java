@@ -1,6 +1,6 @@
 package world.avatarhorizon.spigot.chatter.api;
 
-import org.bukkit.entity.Player;
+import org.bukkit.command.CommandSender;
 import world.avatarhorizon.spigot.chatter.models.ChatterChatException;
 
 public interface IChatSenderService
@@ -13,5 +13,5 @@ public interface IChatSenderService
      * @throws NullPointerException if the Player or the message is null
      * @throws ChatterChatException if no channel with this name was found or if the player do no have the access to that channel
      */
-    void sendChat(Player sender, String channelName, String message) throws ChatterChatException;
+    void sendChat(CommandSender sender, String channelName, String message) throws ChatterChatException;
 }

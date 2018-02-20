@@ -1,5 +1,6 @@
 package world.avatarhorizon.spigot.chatter.handlers;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import world.avatarhorizon.spigot.chatter.ChatterSettings;
 import world.avatarhorizon.spigot.chatter.api.ChannelHandler;
@@ -22,26 +23,27 @@ public class LocalChannel extends ChannelHandler
     @Override
     public String getDefaultFormat()
     {
-        return "[L]{TITLE}~{PLAYER}: {MESSAGE}";
+        return "[L]{TITLE}~{SENDER}: {MESSAGE}";
     }
 
     @Override
     public String getDefaultSpyFormat()
     {
-        return "[SPY][L]{PLAYER}: {MESSAGE}";
+        return "[SPY][L]{SENDER}: {MESSAGE}";
     }
 
     @Override
-    public void filterRecipients(final Player sender, final Set<Player> recipients, final Set<Player> spies)
+    public void filterRecipients(final CommandSender sender, final Set<Player> recipients, final Set<Player> spies)
     {
         if (ChatterSettings.getLocalMaxDistance() > 0)
         {
+            Player pSender = (Player) sender;
             Iterator<Player> iterator = recipients.iterator();
             while (iterator.hasNext())
             {
                 Player recipient = iterator.next();
-                if (recipient.getWorld() != sender.getWorld()
-                        || recipient.getLocation().distance(sender.getLocation()) > ChatterSettings.getLocalMaxDistance())
+                if (recipient.getWorld() != pSender.getWorld()
+                        || recipient.getLocation().distance(pSender.getLocation()) > ChatterSettings.getLocalMaxDistance())
                 {
                     iterator.remove();
                     if (recipient.hasPermission("chatter.admin.socialspy.local"))
@@ -58,15 +60,16 @@ public class LocalChannel extends ChannelHandler
     }
 
     @Override
-    public boolean isAccessAllowed(Player player)
+    public boolean isAccessAllowed(CommandSender sender)
     {
-        return true;
+       return (sender instanceof Player);
     }
 
     @Override
-    public boolean canSendMessage(Player player)
+    public boolean canSendMessage(CommandSender sender)
     {
-        ChatterPlayer chatterPlayer = chatManager.getChatterPlayer(player);
+        //Since isAccessAllowed is called before canSendMessage, we assume sender IS a Player
+        ChatterPlayer chatterPlayer = chatManager.getChatterPlayer((Player) sender);
         if (chatterPlayer == null)
         {
             return false;

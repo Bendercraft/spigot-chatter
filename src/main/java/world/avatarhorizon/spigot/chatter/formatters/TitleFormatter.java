@@ -1,5 +1,6 @@
 package world.avatarhorizon.spigot.chatter.formatters;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import world.avatarhorizon.spigot.chatter.api.IChatFormatter;
 import world.avatarhorizon.spigot.chatter.controllers.ChatManager;
@@ -26,9 +27,16 @@ public class TitleFormatter implements IChatFormatter
     }
 
     @Override
-    public String formatMessage(Player sender, String format)
+    public String formatMessage(CommandSender sender, String format)
     {
-        ChatterPlayer chatPlayer = chatManager.getChatterPlayer(sender);
-        return format.replace("{TITLE}", chatPlayer.getTitle() == null ? "" : chatPlayer.getTitle());
+        if (sender instanceof Player)
+        {
+            ChatterPlayer chatPlayer = chatManager.getChatterPlayer((Player)sender);
+            return format.replace("{TITLE}", chatPlayer.getTitle() == null ? "" : chatPlayer.getTitle());
+        }
+        else
+        {
+            return format.replace("{TITLE}", "");
+        }
     }
 }

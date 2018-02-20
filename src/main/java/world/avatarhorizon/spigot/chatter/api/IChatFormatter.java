@@ -1,6 +1,6 @@
 package world.avatarhorizon.spigot.chatter.api;
 
-import org.bukkit.entity.Player;
+import org.bukkit.command.CommandSender;
 
 import java.util.List;
 
@@ -25,5 +25,5 @@ public interface IChatFormatter
      * @param format The format of the message.
      * @return a String containing the format with the tags replaced by actual values.
      */
-    String formatMessage(Player sender, String format);
+    String formatMessage(CommandSender sender, String format);
 }

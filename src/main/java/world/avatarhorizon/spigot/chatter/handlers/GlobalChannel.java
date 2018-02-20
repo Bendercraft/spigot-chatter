@@ -1,5 +1,6 @@
 package world.avatarhorizon.spigot.chatter.handlers;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import world.avatarhorizon.spigot.chatter.api.ChannelHandler;
 import world.avatarhorizon.spigot.chatter.controllers.ChatManager;
@@ -21,17 +22,17 @@ public class GlobalChannel extends ChannelHandler
     @Override
     public String getDefaultFormat()
     {
-        return "[G]{TITLE}~{PLAYER}: {MESSAGE}";
+        return "[G]{TITLE}~{SENDER}: {MESSAGE}";
     }
 
     @Override
     public String getDefaultSpyFormat()
     {
-        return "[SPY][G]{PLAYER}: {MESSAGE}";
+        return "[SPY][G]{SENDER}: {MESSAGE}";
     }
 
     @Override
-    public void filterRecipients(Player sender, Set<Player> recipients, Set<Player> spies)
+    public void filterRecipients(CommandSender sender, Set<Player> recipients, Set<Player> spies)
     {
         Iterator<Player> recs = recipients.iterator();
         while (recs.hasNext())
@@ -46,15 +47,19 @@ public class GlobalChannel extends ChannelHandler
     }
 
     @Override
-    public boolean isAccessAllowed(Player player)
+    public boolean isAccessAllowed(CommandSender player)
     {
         return true;
     }
 
     @Override
-    public boolean canSendMessage(Player player)
+    public boolean canSendMessage(CommandSender sender)
     {
-        ChatterPlayer chatterPlayer = chatManager.getChatterPlayer(player);
+        if (!(sender instanceof Player))
+        {
+            return true;
+        }
+        ChatterPlayer chatterPlayer = chatManager.getChatterPlayer((Player) sender);
         if (chatterPlayer == null)
         {
             return false;
