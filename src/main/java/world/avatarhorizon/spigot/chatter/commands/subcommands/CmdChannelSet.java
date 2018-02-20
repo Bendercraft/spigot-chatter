@@ -32,8 +32,17 @@ public class CmdChannelSet extends SubCommand
 
         try
         {
-            String channelName = args.remove(0);
-            manager.setCurrentChannel((Player) sender, channelName);
+            String channelName = "Local";
+            if (args.isEmpty())
+            {
+                manager.setCurrentChannel((Player) sender, channelName);
+            }
+            else
+            {
+                channelName = args.remove(0);
+                manager.setCurrentChannel((Player) sender, channelName);
+            }
+
             sender.sendMessage(messages.getString("success.channel.set").replace("{CHANNEL}", channelName));
         }
         catch (ChatterException e)
