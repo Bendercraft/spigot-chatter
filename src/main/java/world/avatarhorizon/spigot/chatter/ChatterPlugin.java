@@ -13,6 +13,7 @@ import world.avatarhorizon.spigot.chatter.controllers.ChatSenderService;
 import world.avatarhorizon.spigot.chatter.controllers.ChatterRegisterService;
 import world.avatarhorizon.spigot.chatter.formatters.PlayerFormatter;
 import world.avatarhorizon.spigot.chatter.formatters.TitleFormatter;
+import world.avatarhorizon.spigot.chatter.formatters.WorldFormatter;
 import world.avatarhorizon.spigot.chatter.handlers.GlobalChannel;
 import world.avatarhorizon.spigot.chatter.handlers.LocalChannel;
 import world.avatarhorizon.spigot.chatter.models.ChatterChannel;
@@ -33,6 +34,7 @@ public class ChatterPlugin extends JavaPlugin
 
         manager = new ChatManager(this, logger);
 
+        manager.registerFormatter(new WorldFormatter());
         manager.registerFormatter(new PlayerFormatter());
         manager.registerFormatter(new TitleFormatter(manager));
 
