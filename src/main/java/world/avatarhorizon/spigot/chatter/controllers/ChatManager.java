@@ -123,6 +123,11 @@ public class ChatManager
         }
     }
 
+    public Map<String, ChatterChannel> getChannels()
+    {
+        return Collections.unmodifiableMap(channels);
+    }
+
     public ChatterChannel getGlobalChannel()
     {
         return globalChannel;

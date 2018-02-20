@@ -4,6 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import world.avatarhorizon.spigot.chatter.commands.subcommands.CmdChannelHelp;
+import world.avatarhorizon.spigot.chatter.commands.subcommands.CmdChannelList;
 import world.avatarhorizon.spigot.chatter.commands.subcommands.CmdChannelSet;
 import world.avatarhorizon.spigot.chatter.commands.subcommands.CmdChannelSpy;
 import world.avatarhorizon.spigot.chatter.controllers.ChatManager;
@@ -23,6 +24,7 @@ public class ChannelCommandExecutor implements CommandExecutor
         this.messages = ResourceBundle.getBundle("messages/commands_channel");
 
         this.subCommands = new ArrayList<>(3);
+        this.subCommands.add(new CmdChannelList(manager, logger, messages));
         this.subCommands.add(new CmdChannelSet(manager, logger, messages));
         this.subCommands.add(new CmdChannelSpy(manager, logger, messages));
         this.subCommands.add(new CmdChannelHelp(logger, messages, this.subCommands));

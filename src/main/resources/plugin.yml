@@ -27,6 +27,9 @@ permissions:
     chatter.command.mute:
         description: Allow to use the mute subcommand
         default: op
+    chatter.command.list:
+        description: Allow to use the list subcommand
+        default: op
     chatter.admin.socialspy.*:
         description: Allow to social spy every channel.
         default: op
