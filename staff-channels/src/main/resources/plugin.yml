@@ -1,0 +1,36 @@
+name: Chatter-StaffChannels
+main: world.avatarhorizon.spigot.staffchannels.StaffChannelsAddonPlugin
+authors: [Nokorbis]
+depend: [Chatter]
+version: 1.0.0
+commands:
+    chatadmin:
+        description: Command to send message into the admin channel
+        aliases: [cad]
+        usage: /<command> your_message
+    chathelp:
+        description: Command to send message into the helper channel
+        aliases: [chp]
+        usage: /<command> your_message
+    chatanimation:
+        description: Command to send a message into the animation channel
+        aliases: [can, chatanim]
+permissions:
+    staffchannels.admin.read:
+        description: Allows to read message from the admin channel
+        default: op
+    staffchannels.admin.write:
+        description: Allows to write message into the admin channel
+        default: op
+    staffchannels.animation.read:
+        description: Allows to read message from the animation channel
+        default: op
+    staffchannels.animation.write:
+        description: Allows to write message into the animation channel
+        default: op
+    staffchannels.help.read:
+        description: Allows to read message from the helpers channel
+        default: op
+    staffchannels.help.write:
+        description: Allows to write message into the helpers channel
+        default: op

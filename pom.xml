@@ -12,6 +12,7 @@
 
     <modules>
         <module>core</module>
+        <module>staff-channels</module>
     </modules>
 
     <repositories>
